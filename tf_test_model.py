@@ -1,6 +1,7 @@
 import tensorflow as tf
 from tensorflow.python.platform import gfile
 from tensorflow_core.examples.tutorials.mnist import input_data
+from tensorflow_core.contrib.learn.python.learn.datasets.mnist import read_data_sets
 from data_object import provide_data
 
 
@@ -41,7 +42,7 @@ if __name__ == "__main__":
         
         # prepare training dataset and test dataset
         # train: 55000, test: 10000, validation: 5000
-        mnist = input_data.read_data_sets('mnist_data/') # load minist dataset
+        mnist = read_data_sets('mnist_data/') # load minist dataset
         data = provide_data(mnist)
 
         # init session

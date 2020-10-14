@@ -1,6 +1,7 @@
 import tensorboard
 import tensorflow as tf
 from tensorflow_core.examples.tutorials.mnist import input_data
+from tensorflow_core.contrib.learn.python.learn.datasets.mnist import read_data_sets
 from tensorflow.python.framework.graph_util import convert_variables_to_constants
 from tf_network import neuralNetwork
 from data_object import provide_data
@@ -74,7 +75,8 @@ def test_net(net, batch_size, dataset):
     '''
 
     num_samples = dataset.num_samples
-    # print(num_samples)
+    #print("num_samples = ",end="" )
+    #print(num_samples)
     data_images = dataset.images
     data_labels = dataset.labels
 
@@ -84,7 +86,11 @@ def test_net(net, batch_size, dataset):
         end = offset + batch_size
         batch_images, batch_labels = data_images[offset:end], data_labels[offset:end]   # get images and labels according to the batch number
         total_accuracy += sess.run(accuracy_operation, feed_dict={input: batch_images, labels: batch_labels})
-    
+
+    #print("total_acc = ",end="")
+    #print(total_accuracy)
+    #print("batch_size = ",end="")
+    #print(batch_size)
     return total_accuracy * batch_size / num_samples
 
 
@@ -110,12 +116,12 @@ if __name__ == "__main__":
 
         # parameter configuration
         lr = 0.001          # learning rate
-        batchsz = 1000      # batch size
+        batchsz = 10     # batch size
         epoch = 30          # training period
         
         # prepare training dataset and test dataset
         # train: 55000, test: 10000, validation: 5000
-        mnist = input_data.read_data_sets('mnist_data/')                # load minist dataset
+        mnist = read_data_sets('mnist_data/')                # load minist dataset
         data = provide_data(mnist)
 
         # create input and output placeholder
